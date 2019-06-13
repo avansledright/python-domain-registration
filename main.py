@@ -1,9 +1,13 @@
 import boto3
 import pprint
+import sys
 
-domain = input("What domain do you want?: ")
+
 client = boto3.client('route53domains')
 
-response = client.check_domain_availability(
-        DomainName=domain )
-pprint.pprint(response)
+if sys.argv[1] == "--help":
+    print("USAGE: python3 main.py domainname")
+else:
+    response = client.check_domain_availability(
+            DomainName=sys.argv[1])
+    pprint.pprint(response) 
